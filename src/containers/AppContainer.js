@@ -2,8 +2,8 @@ import { connect } from 'react-redux';
 import App from '../components/App/App.js';
 import { signIn, signOut } from '../actions/auth.js';
 import { showModal } from '../actions/modal.js'
-const mapStateToProps = ({ auth }) => {
-    return { auth };
+const mapStateToProps = ({ auth, classrooms }) => {
+    return { auth, classrooms };
 }; 
 
 const mapDispatchToProps = (dispatch) => {

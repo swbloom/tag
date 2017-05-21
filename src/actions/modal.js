@@ -1,5 +1,4 @@
 export const showModal = (modalDetails) => {
-    console.log('modal details', modalDetails);
     return {
         type: 'SHOW_MODAL',
         modalType: modalDetails.modalType,

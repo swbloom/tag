@@ -15,11 +15,12 @@ class App extends Component {
           App
           <div>
             <pre>
-              {JSON.stringify(this.props.auth)}
+              {JSON.stringify(this.props.auth, null, 3)}
             </pre>
             { auth.status === 'ANONYMOUS' && <SignIn signIn={this.props.signIn} /> }
             { auth.status === 'SIGNED_IN' && <SignOut signOut={this.props.signOut} /> }
             { auth.status === 'SIGNED_IN' && <CreateClassroom showModal={this.props.showModal} />}
+            { auth.status === 'SIGNED_IN' && <pre>{JSON.stringify(this.props.classrooms, null, 3)}</pre>}
           </div>
       </div>
     );  

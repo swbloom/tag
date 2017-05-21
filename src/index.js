@@ -5,7 +5,8 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import registerServiceWorker from './registerServiceWorker';
 import thunk from 'redux-thunk';
 import initialState from './initial-state';
-import { startListeningToAuth } from './actions/auth';
+import { startListeningToAuth } from './actions/auth.js';
+import { startListeningForClassrooms } from './actions/classrooms.js'
 import './index.css';
 import { Provider } from 'react-redux';
 import { createStore, compose, applyMiddleware } from 'redux';
@@ -25,6 +26,7 @@ const store = createStore(
 );
 
 store.dispatch(startListeningToAuth());
+store.dispatch(startListeningForClassrooms());
 
 ReactDOM.render(<Provider store={store}>
     <Router>
