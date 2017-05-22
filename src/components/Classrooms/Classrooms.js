@@ -6,7 +6,11 @@ const Classrooms = ({ classrooms }) => {
     return (
         <div>
             <ul className='classrooms'>
-                {map(classrooms, (classroom, key) => <li key={key}><Link to={`/classrooms/${key}`}>{classroom.content}</Link></li>)}
+                {map(classrooms, (classroom, key) => 
+                    <li key={key}>
+                        <Link to={`/classrooms/${key}`}>{classroom.content}
+                        </Link>
+                    </li>)}
             </ul>
         </div>
     )

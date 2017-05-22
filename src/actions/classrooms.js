@@ -3,8 +3,22 @@ import { database } from '../services/firebase.js';
 const classroomsRef = database.ref('classrooms');
 
 
+export const joinClassroom = ({uid, displayName, classroomId}) => {
+    return (dispatch) => {
+        const classroomRef = database.ref(`classrooms/${classroomId}`);
+        let students;
+        classroomRef.once('value', (snapshot) => {
+            let classroom = snapshot.val();
+            students = classroom.students || {};
+            students[uid] = displayName;
+        }).then(() => {
+            console.log(students);
+            classroomRef.child('students').set(students);
+        });
+    }
+}
 
-export const addClassroom = (key = Date.now(), { content, uid}) => {
+export const addClassroom = (key = Date.now(), { content, uid }) => {
     return {
         type: 'ADD_CLASSROOM',
         content,
@@ -22,8 +36,6 @@ export const deleteClassroom = (key) => {
 };
 
 export const createClassroom =  ({content, uid}) => {
-    console.log('createClassroom');
-    console.log(content, uid);
     return (dispatch) => {
         const classroom = {
             timeStamp: Date.now(),

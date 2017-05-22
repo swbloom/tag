@@ -5,6 +5,7 @@ import { Route } from 'react-router-dom';
 import SignIn from '../SignIn/SignIn.js';
 import SignOut from '../SignOut/SignOut.js';
 import CreateClassroom from '../CreateClassroom/CreateClassroom.js';
+import JoinClassroom from '../JoinClassroom/JoinClassroom.js';
 import Classrooms from '../Classrooms/Classrooms.js';
 import ClassroomContainer from '../../containers/ClassroomContainer.js';
 
@@ -22,6 +23,7 @@ class App extends Component {
             { auth.status === 'ANONYMOUS' && <SignIn signIn={this.props.signIn} /> }
             { auth.status === 'SIGNED_IN' && <SignOut signOut={this.props.signOut} /> }
             { auth.status === 'SIGNED_IN' && <CreateClassroom showModal={this.props.showModal} />}
+            { auth.status === 'SIGNED_IN' && <JoinClassroom showModal={this.props.showModal} />}
             { auth.status === 'SIGNED_IN' && <Classrooms classrooms={this.props.classrooms} />}
             <Route path='/classrooms/:classroomId' component={ClassroomContainer} />
 
