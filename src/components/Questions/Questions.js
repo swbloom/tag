@@ -9,13 +9,17 @@ class Questions extends React.Component {
             questions: {}
         }
     }
+    removeQuestion(questionId) {
+        const questionRef = database.ref(`classrooms/${this.props.classroomId}/questions/${questionId}`);
+        questionRef.remove();
+    }
     render() {
         return (
             <ul>
                {
                     map(this.state.questions, (question, key) => {
                         return <li key={key}>
-                            {question.content} - {question.user}
+                            {question.content} - {question.user} <button onClick={() => this.removeQuestion(key)}>x</button>
                         </li>
                     })
                }
