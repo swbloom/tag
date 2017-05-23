@@ -8,6 +8,7 @@ import CreateClassroom from '../CreateClassroom/CreateClassroom.js';
 import JoinClassroom from '../JoinClassroom/JoinClassroom.js';
 import Classrooms from '../Classrooms/Classrooms.js';
 import ClassroomContainer from '../../containers/ClassroomContainer.js';
+import PrivateRoute from '../PrivateRoute/PrivateRoute.js'; 
 
 class App extends Component {
   render() {
@@ -25,8 +26,7 @@ class App extends Component {
             { auth.status === 'SIGNED_IN' && <CreateClassroom showModal={this.props.showModal} />}
             { auth.status === 'SIGNED_IN' && <JoinClassroom showModal={this.props.showModal} />}
             { auth.status === 'SIGNED_IN' && <Classrooms classrooms={this.props.classrooms} />}
-            <Route path='/classrooms/:classroomId' component={ClassroomContainer} />
-
+            <PrivateRoute path='/classrooms/:classroomId' auth={auth} component={ClassroomContainer} />
           </div>
       </div>
     );  

@@ -12,7 +12,6 @@ export const joinClassroom = ({uid, displayName, classroomId}) => {
             students = classroom.students || {};
             students[uid] = displayName;
         }).then(() => {
-            console.log(students);
             classroomRef.child('students').set(students);
         });
     }

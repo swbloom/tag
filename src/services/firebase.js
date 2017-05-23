@@ -11,7 +11,11 @@ const config = {
 
 firebase.initializeApp(config);
 
+export const storageKey = 'TAG_KEY';
 export const auth = firebase.auth();
 export const authProvider = new firebase.auth.GoogleAuthProvider();
 export const database = firebase.database();
+export const isAuthenticated = () => {
+  return !!auth.currentUser || !!localStorage.getItem(storageKey);
+}
 export default firebase;

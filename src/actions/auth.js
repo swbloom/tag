@@ -1,4 +1,4 @@
-import { auth, authProvider, database } from '../services/firebase.js';
+import { auth, authProvider, database, storageKey } from '../services/firebase.js';
 import pick from 'lodash/pick';
 
 export const signIn = () => {
@@ -41,11 +41,13 @@ export const startListeningToAuth = () => {
     return (dispatch, getState) => {
         auth.onAuthStateChanged(user => {
             if (user) {
+                window.localStorage.setItem(storageKey, user.uid);
                 dispatch(signedIn(user));
                 database.ref('users')
                     .child(user.uid)
                     .set(pick(user, ['displayName', 'email', 'uid', 'photoURL']));
             } else {
+                window.localStorage.removeItem(storageKey);
                 dispatch(signedOut());
             }
         });
