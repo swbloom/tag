@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import firebase from '../../services/firebase.js';
 import ModalContainer from '../../containers/ModalContainer.js';
-import { Route } from 'react-router-dom';
+// import { Route } from 'react-router-dom';
 import SignIn from '../SignIn/SignIn.js';
 import SignOut from '../SignOut/SignOut.js';
 import CreateClassroom from '../CreateClassroom/CreateClassroom.js';
