@@ -15,7 +15,7 @@ class App extends Component {
     return (
       <div className='App'>
         <ModalContainer />
-          App
+          Tag
           <div>
             <pre>
               {JSON.stringify(this.props.auth, null, 3)}

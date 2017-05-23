@@ -14,6 +14,14 @@ export const joinClassroom = ({uid, displayName, classroomId}) => {
         }).then(() => {
             classroomRef.child('students').set(students);
         });
+
+        const userRef = database.ref(`users/${uid}`);
+        userRef.once('value', (snapshot) => {
+            let user = snapshot.val();
+            let userClassrooms = user.classrooms || {};
+            userClassrooms[classroomId] = classroomId;
+            userRef.child('classrooms').set(userClassrooms);
+        });
     }
 }
 

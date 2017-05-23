@@ -22,6 +22,7 @@ export const signedIn = (user) => {
         type: 'SIGN_IN',
         displayName: user.displayName,
         email: user.email,
+        classrooms: user.classrooms,
         uid: user.uid,
         photoURL: user.photoURL
     }
@@ -43,9 +44,13 @@ export const startListeningToAuth = () => {
             if (user) {
                 window.localStorage.setItem(storageKey, user.uid);
                 dispatch(signedIn(user));
-                database.ref('users')
-                    .child(user.uid)
-                    .set(pick(user, ['displayName', 'email', 'uid', 'photoURL']));
+                const userRef = database.ref('users');
+                userRef.once('value', (snapshot) => {
+                    if (!snapshot.hasChild(user.uid)) {
+                        userRef.child(user.uid)
+                        .set(pick(user, ['displayName', 'email', 'uid', 'photoURL']));
+                    }
+                });
             } else {
                 window.localStorage.removeItem(storageKey);
                 dispatch(signedOut());
